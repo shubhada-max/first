@@ -1,0 +1,132 @@
+
+body{
+    background-color: #eee;
+    margin: 0;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+header,footer{
+    background: #000;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+}
+footer{
+    padding: 20px;
+}
+
+header{
+    background-color:#000;
+    overflow:auto;
+}
+nav ul{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+.logo{
+	float:left;
+}
+nav ul li{
+	float:right;
+}
+nav ul li a {
+	color:#fff000;
+	text-decoration:none;
+	padding:20px;
+	display:block;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+nav ul li a:hover{
+	border-bottom:5px solid #fff000;
+	
+}
+.container{
+    width:960px;
+    margin:0 auto; 
+    overflow: auto;
+}
+
+.bgwhite{
+    background-color:white;
+}
+
+.article{
+    width: 900px;
+    padding: 20px;
+    margin: 30px 0;
+    border: 1px solid red
+}
+
+.article:first-of-type{
+    border-width: 1px;
+    border-style: dotted;
+    border-color: red;
+}
+.article:last-of-type{
+    border: 1px dashed red;
+}
+
+
+h4{
+    color: #c7c7c7;
+    margin: 0 0 10px 0;
+    text-align: right;
+}
+h1{
+    font-family: monospace;
+    margin: 15px 0 0 0
+} 
+
+.banner{
+    background: url
+     
+    background-size: cover;
+    height: 500px
+}
+.about_banner h1,
+.banner h1{
+    padding-top: 200px;
+    color:#fff000;
+    margin: 0;
+    font-size: 48px;
+}
+.about_banner p,
+.banner p{
+    color: #fff000;
+    font-size: 18px;
+}
+.about_banner{
+    background: url
+    background-size: cover;
+    height: 500px   
+}
+/*about batman page*/
+
+.box{
+    width: 29%;
+    margin: 20px 15px;
+    background: #fff;
+    float: left;
+    border: 2px solid #fff000
+}
+
+.content{
+    padding: 0 20px;
+}
+.width-65{
+    width: 65%;
+    float: left;
+    padding: 0 40px;
+}
+
+.width-25{
+    width: 25%;
+    float: left;
+}
+
+.content-container{
+    margin: 50px 0;
+    overflow: auto;
+    
+}
