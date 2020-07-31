@@ -1,0 +1,302 @@
+﻿Data Scientist Role Play: Profiling and Analyzing the Yelp Dataset Coursera Worksheet
+
+
+Part 1: Yelp Dataset Profiling and Understanding
+
+
+1. Profile the data by finding the total number of records for each of the tables below:
+	
+i. Attribute table =select count(business_id)=10000
+					from attribute
+
+ii. Business table =select count(id)=10000
+					from business
+iii. Category table =select count(business_id)=10000
+					from category
+iv. Checkin table =10000
+v. elite_years table =10000
+vi. friend table = 10000
+vii. hours table =10000
+viii. photo table = 10000
+ix. review table = 10000
+x. tip table = 10000
+xi. user table =10000
+	
+
+
+2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
+
+i. Business =		select count(id)=10000  =  10000 (id)
+					from business              
+
+ii. Hours =			select count(distinct business_id) = 1562 (business_id)
+					from hours
+
+iii. Category =		select count(distinct business_id)	= 2643    (business_id)
+					from category
+
+iv. Attribute =		select count(distinct business_id)  = 1115	(business_id)
+					from attribute
+
+v. Review =			select count(distinct business_id)  = 8090
+                    from review
+                    select count(distinct id)          =  10000
+					from review
+					select count(distinct user_id)    =  9581
+					from review
+vi. Checkin =       select count(distinct business_id)  = 493
+                    from checkin 
+vii. Photo =		10000	(id),		6493 (business_id)
+viii. Tip = 		537	(user_id),      3979 (business_id)
+ix. User = 			10000	(id)
+x. Friend = 		11	(user_id)
+xi. Elite_years =	2780	(user_id)
+
+	
+
+
+
+3. Are there any columns with null values in the Users table? Indicate "yes," or "no."
+
+	Answer:  no
+	
+	
+	SQL code used to arrive at answer:
+	select *
+		from  user
+		where 	id is null
+				or name is null
+				or review_count is null
+				or yelping_since is null
+				or useful is null
+				or funny is null
+				or cool is null
+				or fans is null
+				or average_stars is null
+				or compliment_hot is null
+				or compliment_more is null
+				or compliment_profile is null
+				or compliment_cute is null
+				or compliment_list is null
+				or compliment_note is null
+				or compliment_plain is null
+				or compliment_cool is null
+				or compliment_funny is null
+				or compliment_writer is null
+				or compliment_photos is null
+	
+	
+
+	
+4. For each table and column listed below, display the smallest (minimum), largest (maximum), and average (mean) value for the following fields:
+
+	i. Table: Review, Column: Stars
+	
+		min:  1	    max:	5	avg: 307082
+		
+	
+	ii. Table: Business, Column: Stars
+	
+		min:	1	max:	5	avg: 3.6549
+		
+	
+	iii. Table: Tip, Column: Likes
+	
+		min:	0	max:	2	avg: 0.0144
+		
+	
+	iv. Table: Checkin, Column: Count
+	
+		min:	1	max:	53	avg:1.9414
+		
+	
+	v. Table: User, Column: Review_count
+	
+		min:	0	max:	2000	avg:24.2995
+		
+
+
+5. List the cities with the most reviews in descending order:
+
+	SQL code used to arrive at answer:
+		select b.city,sum(review_count)
+		from business b
+		group by city
+		order by sum(review_count) desc
+	
+	Copy and Paste the Result Below:
++-----------------+-------------------+
+| city            | sum(review_count) |
++-----------------+-------------------+
+| Las Vegas       |             82854 |
+| Phoenix         |             34503 |
+| Toronto         |             24113 |
+| Scottsdale      |             20614 |
+| Charlotte       |             12523 |
+| Henderson       |             10871 |
+| Tempe           |             10504 |
+| Pittsburgh      |              9798 |
+| Montréal        |              9448 |
+| Chandler        |              8112 |
+| Mesa            |              6875 |
+| Gilbert         |              6380 |
+| Cleveland       |              5593 |
+| Madison         |              5265 |
+| Glendale        |              4406 |
+| Mississauga     |              3814 |
+| Edinburgh       |              2792 |
+| Peoria          |              2624 |
+| North Las Vegas |              2438 |
+| Markham         |              2352 |
+| Champaign       |              2029 |
+| Stuttgart       |              1849 |
+| Surprise        |              1520 |
+| Lakewood        |              1465 |
+| Goodyear        |              1155 |
++-----------------+-------------------+
+
+	
+6. Find the distribution of star ratings to the business in the following cities:
+
+i. Avon
+
+SQL code used to arrive at answer:
+	select stars, count(stars) as count
+	from business b
+	where city="Avon"
+	group by stars
+	
+
+Copy and Paste the Resulting Table Below (2 columns â€“ star rating and count):
++-------+-------+
+| stars | count |
++-------+-------+
+|   1.5 |     1 |
+|   2.5 |     2 |
+|   3.5 |     3 |
+|   4.0 |     2 |
+|   4.5 |     1 |
+|   5.0 |     1 |
++-------+-------+
+
+ii. Beachwood
+
+SQL code used to arrive at answer:
+	select stars, count(stars) as count
+	from business b
+	where city="Beachwood"
+	group by stars
+	
+
+Copy and Paste the Resulting Table Below (2 columns â€“ star rating and count):
+		
++-------+-------+
+| stars | count |
++-------+-------+
+|   2.0 |     1 |
+|   2.5 |     1 |
+|   3.0 |     2 |
+|   3.5 |     2 |
+|   4.0 |     1 |
+|   4.5 |     2 |
+|   5.0 |     5 |
++-------+-------+
+
+7. Find the top 3 users based on their total number of reviews:
+		
+	SQL code used to arrive at answer:
+	
+		select name, review_count
+        from user
+        order by  review_count desc
+        limit 3
+	
+	Copy and Paste the Result Below:
++--------+--------------+
+| name   | review_count |
++--------+--------------+
+| Gerald |         2000 |
+| Sara   |         1629 |
+| Yuri   |         1339 |
++--------+--------------+
+
+
+8. Does posing more reviews correlate with more fans?
+		NO
+
+	Please explain your findings and interpretation of the results:
+	select  fans,review_count
+    from user
+    order by fans desc
+    limit 12
+------+--------------+
+| fans | review_count |
++------+--------------+
+|  503 |          609 |
+|  497 |          968 |
+|  311 |         1153 |
+|  253 |         2000 |
+|  173 |          930 |
+|  159 |          813 |
+|  133 |          377 |
+|  126 |         1215 |
+|  124 |          862 |
+|  120 |          834 |
+|  115 |          861 |
+|  111 |          408 |
++------+--------------+
+
+	
+9. Are there more reviews with the word "love" or with the word "hate" in them?
+
+	Answer: love
+
+	
+	SQL code used to arrive at answer:
+
+				select 'love'word ,count(text)
+				from review
+				where text like "%love%" 
+			union
+			   select 'hate' word, count(text) 
+				from review
+				where text like "%hate%" 
+
++-----+-------------+
+| word | count(text) |
++------+-------------+
+| hate |         232 |
+| love |        1780 |
++------+-------------+
+		
+	
+10. Find the top 10 users with the most fans:
+
+	SQL code used to arrive at answer:
+	select name, fans
+    from user
+	order by fans desc
+	limit 10
+	
+	Copy and Paste the Result Below:
++-----------+------+
+| name      | fans |
++-----------+------+
+| Amy       |  503 |
+| Mimi      |  497 |
+| Harald    |  311 |
+| Gerald    |  253 |
+| Christine |  173 |
+| Lisa      |  159 |
+| Cat       |  133 |
+| William   |  126 |
+| Fran      |  124 |
+| Lissa     |  120 |
++-----------+------+
+	
+		
+
+
+                  
+
+       
